@@ -31,6 +31,10 @@ int main(){
 				total +=2 ;
 				continue;
 			}
+			if(pos[i+1] == 1){
+				total +=1;
+				total +=pos[i];
+			}
 			total += pos[i] * pos[i+1];
 		}
 	}
