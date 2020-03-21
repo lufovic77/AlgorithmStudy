@@ -1,18 +1,18 @@
-#include <iostream>
+#include <cstdio>
 #include <vector>
 using namespace std;
 int main(){
 	vector <int> A;
 	vector <int> B;
 	int la, lb;
-	cin>>la>>lb;
+	scanf("%d%d", &la, &lb);
 	int temp;
 	for(int i=0;i<la;i++){
-		cin>>temp;
+		scanf("%d", &temp);
 		A.push_back(temp);
 	}
 	for(int i=0;i<lb;i++){
-		cin>>temp;
+		scanf("%d", &temp);	
 		B.push_back(temp);
 	}
 	vector <int> total;
@@ -31,5 +31,5 @@ int main(){
 		}
 	}
 	for(auto elem : total)
-		cout<<elem<<" ";
+		printf("%d ", elem);
 }
