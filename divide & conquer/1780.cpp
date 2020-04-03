@@ -9,25 +9,41 @@ void divide (vector<int> twoD[],pint s, pint e, int cnt[]){
 	int sc = s.second; //start column
 	int er = e.first; //end row
 	int ec = e.second; //end column
-	int size = (ec-sc) * (er-sr);
+	int size = (ec-sc+1) * (er-sr+1);
 //	cout<< sr<<sc<<er<<ec<<twoD[sr][sc]<<endl;
-	if(size == 0){	//only one element
+	if(sr == er & sc == ec){	//only one element
 		cnt[twoD[sr][sc]+1] ++;
 		return ;
 	}
 	int total = 0;
+	bool flag = true;
 	for(int i=sr;i<=er;i++){
-		for(int k=sc;k<=ec;k++)
-			total += twoD[i][k];		
+		for(int k=sc;k<=ec;k++){
+			total += twoD[i][k];
+			if (total !=0)
+				flag = false;
+		}
 	}
-	if(total == 0|| total == size || total == (-1)*size){ //all zero case
+	if( total == size || total == (-1)*size){ //all zero case
 		cnt[twoD[sr][sc]+1] ++;
-		return ;}
+		return ;
+	}
+	if(total == 0 & flag){
+		cnt[twoD[sr][sc]+1] ++;
+		return ;
+	}
 	else{
-		int r = (sr+er);
-		int c = (sc+ec);
-		int row[3] = [r/3, r/3, 2*r/3, r];
-		int col[3] = [];
+		int len = (er-sr+1);
+		int offset[3] = {0, len/3, 2*len/3};
+		for(int i=0;i<3;i++){
+			s.first = sr+offset[i];
+			e.first = er-offset[2-i];
+			for(int k=0;k<3;k++){
+				s.second = sc+offset[k];
+				e.second = ec-offset[2-k];
+				divide(twoD, s, e, cnt);
+			}
+		}
 		
 	}
 	return ;
@@ -52,5 +68,5 @@ int main(){
 	e.first = e.second = N;
 	divide(twoD, s, e, cnt);
 	for(int i=0;i<3;i++)
-		cout<<cnt[i]<<" ";
+		cout<<cnt[i]<<endl;
 }
