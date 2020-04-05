@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -8,12 +9,17 @@ int find(vector<int> input, int height){
 	int maxi = -1;
 	for(int i=0;i<input.size();i++){
 		int len = 1;
+		bool flag[1000001];
+		fill(flag, flag+1000001,false);
 		if(input[i] >= height ){
+			if(flag[i])
+				continue;
 			int l = i-1;
 			while(l >= 0){
 				if(input[l]>= height){
 					len++;
 					l--;
+					flag[l] = true;
 				}
 				else
 					break;
@@ -23,6 +29,7 @@ int find(vector<int> input, int height){
 				if(input[r]>=height){
 					len++;
 					r++;
+					flag[l] = true;
 				}
 				else
 					break;
@@ -39,7 +46,7 @@ int main(){
 	vector <int> toSort;
 	int t;
 	for(int i=0;i<N;i++){
-		cin>>t;
+		scanf("%d", &t);
 		input.push_back(t);
 		toSort.push_back(t);
 	}
