@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
+// -std=c++11
 bool DCR(int a, int b){return a>=b;};
 int find(vector<int> input, int height){
 	int maxi = -1;
