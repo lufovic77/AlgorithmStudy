@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <string>
 #include <cstdlib>
 using namespace std;
@@ -7,9 +8,11 @@ typedef struct node{
 	struct node* prev;
 	char c;
 }NODE;
+#define FOR(i,b) for(int i=0;i<b;i++)
 class Stack{
 	private:
 		int len; //len of original string
+		int len_e;
 		string ori;
 		string exp;
 		NODE* root;
@@ -18,22 +21,43 @@ class Stack{
 			this->ori = o;
 			this->exp = e;
 			this->len = o.size();
-			this->root=(NODE*)malloc(sizeof(NODE));
-			this->root->c = ori[0];
+			this->len_e = e.size();
 		}
 		void push(){
-			NODE* p = this->root;
-			for(int i=1;i<len;i++){
+			NODE* p = NULL;
+			FOR(i, len){
+				if(ori[i] == exp[len_e-1]){
+					bool flag = true;
+					NODE* t = p;
+					FOR(j, len_e-1){
+						fprintf(stderr, "?");
+						if(p->c!=exp[len_e-j-2]){
+							flag = false;
+							break;
+						}
+						p = p->prev;
+					}
+					if (flag == true)	
+						p->next = NULL;
+					else{
+						p = t;
+						continue;
+					}
+				}
 				NODE* tmp=(NODE*)malloc(sizeof(NODE));
 				tmp->c = ori[i];
 				tmp->prev = p;
 				tmp->next = NULL;
-				p->next = tmp;
-				p=tmp;
+				if(p!=NULL)
+					p->next = tmp;
+				else
+					root = tmp;
+				p = tmp;
 			}
 		}
 		void print(){
 			NODE* p = root;
+			cout<<p;
 			while(p!=NULL){
 				cout<<p->c<<endl;
 				p = p->next;
