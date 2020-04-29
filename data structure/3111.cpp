@@ -16,6 +16,7 @@ class Stack{
 		string ori;
 		string exp;
 		NODE* root;
+		NODE* rear;
 	public:
 		int len_r;
 		Stack(string o, string e){
@@ -39,6 +40,7 @@ class Stack{
 					root = tmp;
 				p = tmp;
 			}
+			rear = p;
 		}
 		void print(){
 			NODE* p = root;
@@ -49,8 +51,12 @@ class Stack{
 			if(root==NULL)
 				cout<<"FRULA";
 		}
-		int rm_front(int len){
-			NODE* p = root;
+		int rm(int len, int f){
+			NODE* p;
+			if(f==0)
+				p = root;
+			else
+				p = rear;
 			int len_t=0;
 			FOR(i, len){
 				len_t++;
@@ -71,6 +77,7 @@ class Stack{
 							p->prev = NULL;
 						}
 						p->next = t;
+						if(t!=NULL)
 						t->prev = p;
 						len_t-=len_e;
 						len_r-=len_e;
@@ -79,7 +86,10 @@ class Stack{
 					else
 						p = t;
 				}
-				p = p->next;
+				if(f==0)
+					p = p->next;
+				else
+					p = p->prev;
 			}
 			return len_r;
 		}
@@ -88,11 +98,11 @@ class Stack{
 			int len_t=0;
 			FOR(i, len){
 				len_t++;
-				if(ori[i] == exp[len_e-1] && len_t>=len_e){
+				if(p->c == exp[len_e-1] && len_t>=len_e){
 					bool flag = true;
 					NODE* t = p->next;
-					FOR(j, len_e-1){
-						if(p->c!=exp[len_e-j-2]){
+					FOR(j, len_e){
+						if(p->c!=exp[len_e-j-1]){
 							flag = false;
 							break;
 						}
@@ -100,8 +110,10 @@ class Stack{
 					}
 					if (flag == true)
 						return true;
-					else
+					else{
 						p = t;
+						continue;
+					}
 				}
 				p = p->next;
 			}
@@ -115,11 +127,12 @@ int main(){
 	Stack stack(original, explode); //initialize
 	stack.push();
 	int len=0, tlen=-1;
-	while(1){
-		len = stack.rm_front(stack.len_r);
-		if(!stack.scan(len)){
+		len = stack.rm(stack.len_r,0);
+		if(stack.scan(len)){
 			stack.print();
+			cout<<len;
 			return 0;
 		}
-	}
+		len = stack.rm(len,1);
+	stack.print();
 }
