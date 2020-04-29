@@ -15,18 +15,20 @@ class Stack{
 		int len_e;
 		string ori;
 		string exp;
-		NODE* root;
-		NODE* rear;
 	public:
 		int len_r;
+		NODE* root;
+		NODE* rear;
 		Stack(string o, string e){
 			this->ori = o;
 			this->exp = e;
 			this->len = o.size();
 			this->len_e = e.size();
 			len_r = 0;
+
 		}
 		void push(){
+			len_r = 0;
 			NODE* p = NULL;
 			FOR(i, len){
 				len_r++;
@@ -43,6 +45,7 @@ class Stack{
 			rear = p;
 		}
 		void print(){
+			cout<<"ddddiyoong"<<endl;
 			NODE* p = root;
 			while(p!=NULL){
 				cout<<p->c;
@@ -57,10 +60,11 @@ class Stack{
 				p = root;
 			else
 				p = rear;
+			cout<<"2: "<<root->c<<" "<<rear->c<<endl;
 			int len_t=0;
 			FOR(i, len){
 				len_t++;
-				if(p->c == exp[len_e-1] && len_t>=len_e){
+				if((f==0 && p->c == exp[len_e-1] && len_t>=len_e) || (f==1 && p->c == exp[len_e-1]&&len_r+len_e<=len_r+1)){
 					bool flag = true;
 					NODE* t = p->next;
 					FOR(j, len_e){
@@ -78,7 +82,9 @@ class Stack{
 						}
 						p->next = t;
 						if(t!=NULL)
-						t->prev = p;
+							t->prev = p;
+						else
+							rear = p;
 						len_t-=len_e;
 						len_r-=len_e;
 						return len_r;
@@ -126,13 +132,19 @@ int main(){
 	cin>>explode>>original;
 	Stack stack(original, explode); //initialize
 	stack.push();
-	int len=0, tlen=-1;
-		len = stack.rm(stack.len_r,0);
-		if(stack.scan(len)){
+	int len=0, t=0, cnt=0;
+	while(1){
+		if(!stack.scan(stack.len_r)){
 			stack.print();
 			cout<<len;
 			return 0;
 		}
-		len = stack.rm(len,1);
+		len = stack.rm(stack.len_r,t++);
+		t%=2;
+		cnt++;
+		cout<<"cnt: "<<cnt<<endl;
+		if(cnt==10)
+			return 0;
+	}
 	stack.print();
 }
