@@ -45,14 +45,13 @@ class Stack{
 			rear = p;
 		}
 		void print(){
-			cout<<"ddddiyoong"<<endl;
 			NODE* p = root;
 			while(p!=NULL){
 				cout<<p->c;
 				p = p->next;
 			}
 			if(root==NULL)
-				cout<<"FRULA";
+				cout<<"";
 		}
 		int rm(int len, int f){
 			NODE* p;
@@ -60,11 +59,10 @@ class Stack{
 				p = root;
 			else
 				p = rear;
-			cout<<"2: "<<root->c<<" "<<rear->c<<endl;
 			int len_t=0;
 			FOR(i, len){
 				len_t++;
-				if((f==0 && p->c == exp[len_e-1] && len_t>=len_e) || (f==1 && p->c == exp[len_e-1]&&len_r+len_e<=len_r+1)){
+				if((f==0 && p->c == exp[len_e-1] && len_t>=len_e) || (f==1 && p->c == exp[len_e-1]&&len_t+len_e<=len_r+1)){
 					bool flag = true;
 					NODE* t = p->next;
 					FOR(j, len_e){
@@ -75,11 +73,9 @@ class Stack{
 						p = p->prev;
 					}
 					if (flag == true){	
-						if(p==NULL){
-							p = (NODE*)malloc(sizeof(NODE));
-							root = p;
-							p->prev = NULL;
-						}
+						if(p==NULL)
+							root = t;
+						else
 						p->next = t;
 						if(t!=NULL)
 							t->prev = p;
@@ -136,13 +132,11 @@ int main(){
 	while(1){
 		if(!stack.scan(stack.len_r)){
 			stack.print();
-			cout<<len;
 			return 0;
 		}
 		len = stack.rm(stack.len_r,t++);
 		t%=2;
 		cnt++;
-		cout<<"cnt: "<<cnt<<endl;
 		if(cnt==10)
 			return 0;
 	}
