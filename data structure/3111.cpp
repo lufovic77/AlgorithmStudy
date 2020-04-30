@@ -65,6 +65,7 @@ class Stack{
 				if((f==0 && p->c == exp[len_e-1] && len_t>=len_e) || (f==1 && p->c == exp[len_e-1]&&len_t+len_e<=len_r+1)){
 					bool flag = true;
 					NODE* t = p->next;
+					NODE* tt = p;
 					FOR(j, len_e){
 						if(p->c!=exp[len_e-j-1]){
 							flag = false;
@@ -85,8 +86,9 @@ class Stack{
 						len_r-=len_e;
 						return len_r;
 					}
-					else
-						p = t;
+					else{
+						p = tt;
+					}
 				}
 				if(f==0)
 					p = p->next;
@@ -136,9 +138,5 @@ int main(){
 		}
 		len = stack.rm(stack.len_r,t++);
 		t%=2;
-		cnt++;
-		if(cnt==10)
-			return 0;
 	}
-	stack.print();
 }
