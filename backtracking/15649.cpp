@@ -1,12 +1,15 @@
 #include <iostream>
+#include <cstdio>
 #include <vector>
 //-std=c++11
+//Time exceeds with iostream 
+//cout<<endl; is fucxing slow
 using namespace std;
 void permute(int n, int m, bool flag[], vector<int> ret, int cnt){
 	if(cnt>=m){
 		for(auto a : ret)
 			cout<<a<<" ";
-		cout<<endl;
+		printf("\n");
 		return ;
 	}
 	for(int i=1;i<=n;i++){
