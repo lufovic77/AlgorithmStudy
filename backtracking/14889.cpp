@@ -1,13 +1,47 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <climits>
 using namespace std;
 #define FOR(i, k) for(int i=1;i<=k;i++)
 int ability[22][22];
-int stotal=0, ltotal=0, n;
+int n;
+int mini = INT_MAX;
 void backtrack(bool flag[],int cur, int cnt){
 	if(cnt == n/2){
-		FOR(i, n)
-			cout<<flag[i];
-		cout<<endl;
+		vector <int> start;
+		vector <int> link;
+		start.push_back(0);
+		link.push_back(0);
+		FOR(i, n){
+			if(flag[i])
+				start.push_back(i);
+			else
+				link.push_back(i);
+		}
+		int stotal=0, ltotal=0, t1,i1, i2;
+			FOR(a, start.size()){
+				FOR(b, start.size()){
+					if(a==b)
+						continue;
+					i1 = start[a];
+					i2 = start[b];
+					t1 = ability[i1][i2];
+					stotal+=(t1);
+				}
+			}
+			FOR(a, link.size()){
+				FOR(b, link.size()){
+					if(a==b)
+						continue;
+					i1 = link[a];
+					i2 = link[b];
+					t1 = ability[i1][i2];
+					ltotal+=(t1);
+				}
+			}
+			mini = min(mini, abs(stotal-ltotal));
 		return ;
 	}
 	for(int i=cur;i<=n;i++){
@@ -31,4 +65,5 @@ int main(){
 	fill(flag, flag+21, false);
 	flag[1] = true;
 	backtrack(flag,2, 1);
+	cout<<mini;
 }
