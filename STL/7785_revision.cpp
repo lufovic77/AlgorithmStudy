@@ -1,3 +1,7 @@
+
+/*
+ * Using map STL. Time exceeding.
+ * Revise with using hash map. 
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,3 +31,4 @@ int main(){
 		s.pop();
 	}
 }
+*/
