@@ -1,4 +1,48 @@
-
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <map>
+#define FOR(i,n) for(int i=0;i<n;i++)
+typedef unsigned long ul;
+using namespace std;
+ul hashing(const string key, int num_partitions) { 
+     unsigned long hash = 5381; 
+     int c;
+	 int i=0;
+     while ((c = key[i]) != '\0'){
+     	hash = hash * 33 + c; 
+		i++;
+	 }
+     return hash % num_partitions; 
+}
+bool CMP(string a, string b){return a>b;};
+pair<int, string> arr[5000];
+int main(){
+	int n;
+	string name, stat;
+	cin>>n;
+	ul hash;
+	FOR(i,n){
+		cin>>name>>stat;
+		hash = hashing(name, 5000);
+		if(stat == "enter"){
+			arr[hash].first = 1;
+			arr[hash].second = name;
+		}
+		else
+			arr[hash].first = 0;
+	}
+	vector<string> v;
+	FOR(i, 5000){
+		if(arr[i].first == 1)
+			v.push_back(arr[i].second);
+	}
+	sort(v.begin(), v.end(), CMP);
+	for(auto a: v)
+		cout<<a<<endl;
+}
 /*
  * Using map STL. Time exceeding.
  * Revise with using hash map. 
