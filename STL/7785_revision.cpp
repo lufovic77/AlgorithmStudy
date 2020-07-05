@@ -18,7 +18,7 @@ ul hashing(const string key, int num_partitions) {
      return hash % num_partitions; 
 }
 bool CMP(string a, string b){return a>b;};
-pair<int, string> arr[5000];
+pair<int, string> arr[1000002];
 int main(){
 	int n;
 	string name, stat;
@@ -26,8 +26,8 @@ int main(){
 	ul hash;
 	FOR(i,n){
 		cin>>name>>stat;
-		hash = hashing(name, 5000);
-		if(stat == "enter"){
+		hash = hashing(name, 1000000);
+		if(stat[0] == 'e'){
 			arr[hash].first = 1;
 			arr[hash].second = name;
 		}
@@ -35,13 +35,13 @@ int main(){
 			arr[hash].first = 0;
 	}
 	vector<string> v;
-	FOR(i, 5000){
+	FOR(i, 1000000){
 		if(arr[i].first == 1)
 			v.push_back(arr[i].second);
 	}
 	sort(v.begin(), v.end(), CMP);
 	for(auto a: v)
-		cout<<a<<endl;
+		printf("%s\n", a.c_str());
 }
 /*
  * Using map STL. Time exceeding.
