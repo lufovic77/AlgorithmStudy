@@ -1,18 +1,12 @@
 #include <iostream>
+#include <cstdio>
+#include <math.h>
 using namespace std;
+typedef long long int llu;
 int main(){
-	int n, init, add, rec, sub;
-	init = 9;
-	rec = 4;
+	llu n, ret;
 	cin>>n;
-	for(int i=1;i<n;i++){
-		add = 5*rec;
-		sub = 0;
-		for(int j=1;j<=2*i-1;j++)
-			sub +=1;
-		add = add - 4*sub;
-		init += add;
-		rec*=4;
-	}
-	cout<<init;
+	ret = pow(2, n);
+	ret = pow(ret+1, 2);
+	printf("%lld", ret);
 }
