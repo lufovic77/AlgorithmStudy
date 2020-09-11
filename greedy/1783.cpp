@@ -25,11 +25,9 @@ int chess(int posX, int posY, vector <bool> &flag,int count, int type){
 					return -1;
 				}			
 			}
-			return count;
 		}
-		else{
-			return count;		
-		}
+		cout<<posX<<" "<<posY<<" "<<count<<endl;
+		return count;			
 	}	
 	return ans;
 }
@@ -40,8 +38,8 @@ int main(){
 		flag.push_back(false);
 	int curX = M-1;
 	int curY = 0;
-	int	ans = max(ans, chess(curX ,curY, flag, 1, -1));
-	if (ans ==-1)
+	int	ans = chess(curX ,curY, flag, 1, -1);
+	if (ans ==-1 || ans == 0)
 		cout<<"1";
 	else
 		cout<<ans;

@@ -26,7 +26,7 @@ int main(){
 	ul hash;
 	FOR(i,n){
 		cin>>name>>stat;
-		hash = hashing(name, 1000000);
+		hash = hashing(name, 1000001);
 		if(stat[0] == 'e'){
 			arr[hash].first = 1;
 			arr[hash].second = name;

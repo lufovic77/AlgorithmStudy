@@ -5,12 +5,13 @@
 using namespace std;
 // -std=c++11
 bool DCR(int a, int b){return a>=b;};
-int find(vector<int> input, int height){
+int traverse(vector<int> input, int height){
 	int maxi = -1;
+
+	bool flag[1000001];
+	fill(flag, flag+1000001,false);
 	for(int i=0;i<input.size();i++){
 		int len = 1;
-		bool flag[1000001];
-		fill(flag, flag+1000001,false);
 		if(input[i] >= height ){
 			if(flag[i])
 				continue;
@@ -53,7 +54,7 @@ int main(){
 	sort(toSort.begin(), toSort.end(), DCR);
 	int maxi = -1;
 	for(auto a: toSort){
-		maxi = max(maxi, find(input, a));
+		maxi = max(maxi, traverse(input, a));
 	}
 	cout<<maxi;
 }
