@@ -82,15 +82,27 @@ class segT{
 			int mid = (leftN+rightN)/2;
 			pair<int, int> tmp1 = update(index, newValue, node*2, leftN, mid);
 			pair<int, int> tmp2 = update(index, newValue, node*2+1, mid+1, rightN);
-			if(tmp1.first >= tmp2.first){
+			if(tmp1.first > tmp2.first){
 				tree[node].second = tmp2.second;
 				tree[node].first = tmp2.first;
 				return tree[node];
 			}
-			else{
+			else if (tmp1.first < tmp2.first){
 				tree[node].second = tmp1.second;
 				tree[node].first = tmp1.first;
 				return tree[node];
+			}
+			else{
+				if(tmp1.second < tmp2.second){
+					tree[node].second = tmp1.second;
+					tree[node].first = tmp1.first;
+					return tree[node];				
+				}
+				else{
+					tree[node].second = tmp2.second;
+					tree[node].first = tmp2.first;
+					return tree[node];
+				}
 			}
 		}
 };
