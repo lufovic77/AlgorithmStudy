@@ -1,0 +1,19 @@
+set nu
+set autoindent
+set shiftwidth=4
+set tabstop=4
+
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"VundleVim/Vundle.vim
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Raimondi/delimitMate' "괄호 자동완성 
+
+call vundle#end()
+filetype plugin indent on
+
+" delimitMate
+let delimitMate_expand_cr=1
