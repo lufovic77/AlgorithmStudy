@@ -25,16 +25,29 @@ class segT{
 			int mid = (left+right)/2;
 			pair<int, int> tmp1 = init(node*2, left, mid);
 			pair<int, int> tmp2 = init(node*2+1, mid+1, right); 
-			if(tmp1.first >= tmp2.first){
+			if(tmp1.first > tmp2.first){
 				tree[node].second = tmp2.second;
 				tree[node].first = tmp2.first;
 				return tree[node];
 			}
-			else{
+			else if(tmp1.first < tmp2.first){
 				tree[node].second = tmp1.second;
 				tree[node].first = tmp1.first;
 				return tree[node];
 			}
+			else{
+				if(tmp1.second < tmp2.second){
+					tree[node].second = tmp1.second;
+					tree[node].first = tmp1.first;
+					return tree[node];				
+				}
+				else{
+					tree[node].second = tmp2.second;
+					tree[node].first = tmp2.first;
+					return tree[node];
+				}
+			}
+
 		}
 		pair<int, int> query(int l, int r, int node, int leftN, int rightN){
 			if(rightN<l || leftN>r){
