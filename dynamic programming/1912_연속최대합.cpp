@@ -20,10 +20,17 @@ int main(){
 		if(dp[i-1] + arr[i] < 0 ){
 			maxi = max(maxi, dp[i-1]);
 			dp[i] = arr[i];
+			if(i==n-1)
+				maxi = max(maxi, dp[i]);
+			continue;
+		}
+		if(dp[i-1]+arr[i]>0 && dp[i-1]<0){
+			maxi = max(arr[i], maxi);
+			dp[i] = arr[i];
 			continue;
 		}
 		dp[i] = dp[i-1] + arr[i];
-		maxi = max(maxi, dp[i-1]);
+		maxi = max(maxi, dp[i]);
 	}
 	cout<<maxi;
 }
