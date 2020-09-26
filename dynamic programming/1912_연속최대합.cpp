@@ -14,9 +14,10 @@ int main(){
 		scanf("%d", &tmp);
 		arr.push_back(tmp);
 	}
-	maxi = INT_MIN;
+	maxi = arr[0];
 	dp[0] = arr[0];
 	for(int i=1;i<n;i++){
+		/*
 		if(dp[i-1] + arr[i] < 0 ){
 			maxi = max(maxi, dp[i-1]);
 			dp[i] = arr[i];
@@ -30,6 +31,16 @@ int main(){
 			continue;
 		}
 		dp[i] = dp[i-1] + arr[i];
+		maxi = max(maxi, dp[i]);
+		*/
+		if(dp[i-1]+arr[i]>0 && dp[i-1]>0)
+			dp[i] =dp[i-1]+arr[i];
+		if(dp[i-1] + arr[i] < 0 ){
+			maxi = max(maxi, dp[i-1]);
+			dp[i] = arr[i];
+		}
+		if(dp[i-1]+arr[i]>0 && dp[i-1]<0)
+			dp[i] = arr[i];
 		maxi = max(maxi, dp[i]);
 	}
 	cout<<maxi;
