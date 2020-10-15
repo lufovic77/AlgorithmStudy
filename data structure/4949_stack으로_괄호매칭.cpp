@@ -17,17 +17,13 @@ using namespace std;
  * */
 int main(){
 	bool flag;
-	int alter=0;
+	stack <char>st;
 	while(1){
-		alter++;
 		bool flag = false;
 		string input;
-		stack <char>st;
 		getline(cin, input);
 		if(input==".")
 			return 0;
-		if(alter%2==0)
-			continue;
 		FOR(i, input.length()){
 			if(input[i]=='(' || input[i]=='['){
 				st.push(input[i]);
@@ -54,5 +50,6 @@ int main(){
 			printf("no\n");
 		else if(!flag && st.empty())
 			printf("yes\n");
+		while( !st.empty() ) st.pop();
 	}
 }
