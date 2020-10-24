@@ -7,21 +7,16 @@ int main(){
 	int n, m, ret=0;
 	cin>>n>>m;
 	if(m<=n){
-		while(n!=m){
-			n--;
-			ret++;
-		}
-		cout<<ret;
+		cout<<n-m;
 		return 0;
 	}
-	while(2*n<=m){ visited[n]=1; n*=2;ret++;}
 	queue <pair<int, int> > q;
 	q.push(make_pair(n, ret));
 	while(!q.empty()){
 		n = q.front().first;
 		ret = q.front().second;
 		q.pop();
-		if(n>100000)
+		if(n>100000 || n<0)
 			continue;
 		if(visited[n])
 			continue;
