@@ -47,10 +47,10 @@ int main(){
 			if(vn[i][j]!=1){
 				q.push(make_pair(i, j));
 				tmp = normal[i][j];
+				vn[i][j] = 1;
 				while(!q.empty()){
 					x = q.front().first;
 					y = q.front().second;
-					vn[x][y] = 1;
 					q.pop();
 					FOR(k, 4){
 						int nx = x+dx[k], ny = y+dy[k];
@@ -61,6 +61,11 @@ int main(){
 						if(normal[nx][ny] != tmp)
 							continue;
 						q.push(make_pair(nx, ny));
+						vn[nx][ny] = 1;
+						/*
+						 * IF, visiting statement is not here, 
+						 * queue will explode in the case where
+						 * all elements on the map are same*/
 					}
 				}
 				dist++;
@@ -77,10 +82,10 @@ int main(){
 			if(vd[i][j]!=1){
 				q.push(make_pair(i, j));
 				tmp = disable[i][j];
+				vd[i][j] = 1;
 				while(!q.empty()){
 					x = q.front().first;
 					y = q.front().second;
-					vd[x][y] = 1;
 					q.pop();
 					FOR(k, 4){
 						int nx = x+dx[k], ny = y+dy[k];
@@ -91,6 +96,7 @@ int main(){
 						if(disable[nx][ny] != tmp)
 							continue;
 						q.push(make_pair(nx, ny));
+						vd[nx][ny] = 1;
 					}
 				}
 				dist++;
