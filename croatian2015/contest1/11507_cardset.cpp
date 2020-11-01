@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 #define FOR(i, n) for(int i=0;i<n;i++)
-int card[4][13];
+int card[4][14];
 int num(char c){
 	switch(c){
 		case 'P':
@@ -41,7 +41,7 @@ int main(){
 	int ret;
 	FOR(i, 4){
 		ret = 0;
-		FOR(j, 13){
+		for(int j=1;j<14;j++){
 			if(card[i][j]==0)
 				ret++;
 		}
