@@ -2,10 +2,11 @@
 #include <cstdio>
 #include <vector>
 #include <algorithm>
-#define FOR(i, n) for(int i=0;i<n;i++)
 using namespace std;
-int uf(int n, int x, int y, int k){
-	int ret = 0;
+typedef long long int ull;
+#define FOR(i, n) for(ull i=0;i<n;i++)
+ull uf(ull n, ull x, ull y, ull k){
+	ull ret = 0;
 	while(1){
 		if(x==y)
 			return ret;
@@ -16,11 +17,15 @@ int uf(int n, int x, int y, int k){
 	}
 }
 int main(){
-	int n, k, q, x, y, ans;
+	ull n, k, q, x, y, ans;
 	cin>>n>>k>>q;
 	FOR(i, q){
-		scanf("%d%d", &x, &y);
+		scanf("%lld%lld", &x, &y);
+		if(k==1){
+			printf("%lld\n", abs(x-y));
+			continue;
+		}
 		ans = uf(n, x, y, k);
-		printf("%d\n",ans);
+		printf("%lld\n",ans);
 	}
 }
