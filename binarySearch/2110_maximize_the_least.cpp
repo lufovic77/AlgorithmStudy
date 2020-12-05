@@ -23,8 +23,17 @@ void BS(int l, int r, int c){
 			rem--;
 		}
 	}
+	if(l==r){
+		if(rem==0)
+			mini = max(mini,ret);
+		return ;
+	}
 	if(rem>0)
 		BS(l, mid-1, c);
+	else if(rem ==0){
+		mini = max(mini, ret);
+		return ;
+	}
 	else{ //suits the case yet not sure it's optimal
 		mini = max(mini, ret);
 		BS(mid+1, r, c);
@@ -39,7 +48,7 @@ int main(){
 		house.push_back(tmp);
 	}
 	sort(house.begin(), house.end());
-	BS(1, house[house.size()-1], c);
+	BS(1, house[house.size()-1]-house[0], c);
 	cout<<mini;
 }
 
