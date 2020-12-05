@@ -9,8 +9,10 @@ using namespace std;
 vector<int> house;
 int mini = INT_MIN;
 void BS(int l, int r, int c){
-	if(l==r)
+	if(l==r){
+		mini = max(mini, l);
 		return ;
+	}
 	int mid = (l+r)/2;
 	int prev = 0, rem = c-1, ret = INT_MAX;
 	for(int i=1;i<house.size();i++){
