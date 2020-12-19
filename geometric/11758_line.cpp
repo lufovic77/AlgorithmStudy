@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #define FOR(i,n) for(int i=0;i<n;i++)
+#define EPSILON 0.000001
 using namespace std;
 int main(){
 	int a, b, constant;
@@ -23,7 +24,7 @@ int main(){
 		if(pos[1].first == pos[2].first)
 			grad2 = 0;
 	}
-	if(grad1 == grad2){
+	if(abs(grad1-grad2) < EPSILON){
 		cout<< 0;
 		return 0;
 	}
