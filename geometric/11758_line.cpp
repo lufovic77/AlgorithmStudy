@@ -17,12 +17,12 @@ int main(){
 	if(pos[1].first != pos[0].first)
 		grad1 = ((pos[1].second - pos[0].second) / (pos[1].first - pos[0].first));
 	else
-		grad1 = 0;
+		grad1 = 1;
 
 	if(pos[2].first != pos[1].first)
 		grad2 = ((pos[2].second - pos[1].second) / (pos[2].first - pos[1].first));
 	else
-		grad2 = 0;
+		grad2 = 1;
 	if(abs(grad1-grad2) < EPSILON){
 		cout<< 0;
 		return 0;
@@ -36,9 +36,9 @@ int main(){
 	}
 	else if (pos[0].first>pos[1].first){
 		if(constant + grad1*pos[2].first >pos[2].second )
-			cout<<"-1";
-		else
 			cout<<"1";
+		else
+			cout<<"-1";
 	}
 	else{ //vertical
 		if(pos[1].second > pos[0].second){
