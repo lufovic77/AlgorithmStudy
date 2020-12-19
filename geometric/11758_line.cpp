@@ -7,23 +7,22 @@
 #define EPSILON 0.000001
 using namespace std;
 int main(){
-	int a, b, constant;
-	vector<pair<int, int> > pos;
+	float a, b, constant;
+	vector<pair<float, float> > pos;
 	FOR(i, 3){
 		cin>>a>>b;
 		pos.push_back(make_pair(a, b));
 	}
 	float grad1, grad2;
-	if(pos[1].first != pos[0].first && pos[2].first!=pos[1].first){
-		grad2 = (float)((pos[2].second - pos[1].second) / (pos[2].first - pos[1].first));
-		grad1 = (float)((pos[1].second - pos[0].second) / (pos[1].first - pos[0].first));
-	}
-	else{
-		if(pos[1].first == pos[0].first)
-			grad1 = 0;
-		if(pos[1].first == pos[2].first)
-			grad2 = 0;
-	}
+	if(pos[1].first != pos[0].first)
+		grad1 = ((pos[1].second - pos[0].second) / (pos[1].first - pos[0].first));
+	else
+		grad1 = 0;
+
+	if(pos[2].first != pos[1].first)
+		grad2 = ((pos[2].second - pos[1].second) / (pos[2].first - pos[1].first));
+	else
+		grad2 = 0;
 	if(abs(grad1-grad2) < EPSILON){
 		cout<< 0;
 		return 0;
