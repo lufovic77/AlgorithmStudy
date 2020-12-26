@@ -26,11 +26,11 @@ void backtrack(int prev,int decimal, int index,int number[], int end){
 int main(){
 	int number[9];
 	cin>>n;
-	if(n>1021){
+	if(n>1022){
 		cout<<"-1";
 		return 0;
 	}
-	FOR(i, 9){ //자릿수
+	FOR(i, 10){ //자릿수
 		int decimal = i;	
 		for(int k=0;k<=9;k++){
 			number[0] = k;
