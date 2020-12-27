@@ -12,7 +12,10 @@ void backtrack(int index, int length, int button[]){
 		int tmp = 0;
 		for(int i=0;i<length;i++)
 			tmp +=pow(10, length-i-1)*button[i];
-		tmp = abs(tmp-n)+length;
+		if(tmp == n)
+			tmp = length;
+		else
+			tmp = abs(tmp-n)+length;
 		cnt = min(cnt, tmp);
 		return ;
 	}
@@ -27,13 +30,17 @@ int main(){
 	fill(remote, remote+10, 1);
 	int m,tmp, len;
 	int button[10];
+	fill(button, button+10, 0);
 	cin>>n>>m;
 	len = (int)(log10(n)+1); //how to get the number of digits
+	if(n == 0)
+		len = 1;
 	FOR(i, m){
 		cin>>tmp;
 		remote[tmp] = 0;
 	}
 	cnt = abs(n-100);
-	backtrack(0, len,button);
+	for(int i=1;i<=len;i++)
+		backtrack(0, i,button);
 	cout<<cnt;
 }
