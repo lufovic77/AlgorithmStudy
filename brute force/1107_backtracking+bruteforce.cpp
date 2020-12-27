@@ -40,7 +40,7 @@ int main(){
 		remote[tmp] = 0;
 	}
 	cnt = abs(n-100);
-	for(int i=1;i<=len;i++)
+	for(int i=1;i<=len+1;i++)
 		backtrack(0, i,button);
 	cout<<cnt;
 }
