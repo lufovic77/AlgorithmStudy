@@ -7,30 +7,39 @@
 using namespace std;
 int remote[10];
 int cnt, n;
-void backtrack(int index, int length, int button[]){
+int button[8];
+void backtrack(int index, int length, bool flag){
 	if(index == length){
-		int tmp = 0;
-		for(int i=0;i<length;i++)
+		bool chk = true;
+		int tmp = 0, len= 0;
+		for(int i=0;i<length;i++){
+			if(button[i]!=0)
+				chk = false;
+			if(!chk)
+				len++;
 			tmp +=pow(10, length-i-1)*button[i];
+		}
 		if(tmp == n)
-			tmp = length;
+			tmp = len;
 		else
-			tmp = abs(tmp-n)+length;
+			tmp = abs(tmp-n)+len;
 		cnt = min(cnt, tmp);
 		return ;
 	}
-	FOR(i, 10)
-		if(remote[i] == 1){
+	FOR(i, 10){
+		if(i!=0)
+			flag = false;
+		if(remote[i] == 1 || (i==0 && flag)){
 			button[index] = i;
-			backtrack(index+1, length, button);
+			backtrack(index+1, length, flag);
 		}
+	}
 	return ;
 }
 int main(){
 	fill(remote, remote+10, 1);
 	int m,tmp, len;
-	int button[10];
-	fill(button, button+10, 0);
+	fill(button, button+8, 0);
 	cin>>n>>m;
 	len = (int)(log10(n)+1); //how to get the number of digits
 	if(n == 0)
@@ -40,7 +49,10 @@ int main(){
 		remote[tmp] = 0;
 	}
 	cnt = abs(n-100);
-	for(int i=1;i<=len+1;i++)
-		backtrack(0, i,button);
+	if(m==0){
+		cout<<min(len,cnt);
+		return 0;
+	}
+	backtrack(0, len+1, true);
 	cout<<cnt;
 }
