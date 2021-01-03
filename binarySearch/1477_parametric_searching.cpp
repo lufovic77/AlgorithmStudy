@@ -15,16 +15,15 @@ int main(){
 		scanf("%d", &tmp);
 		pos.push_back(tmp);
 	}
+	pos.push_back(0);
+	pos.push_back(l-1);
 	sort(pos.begin(), pos.end());
-	int low=1, high = l;
+	n++;
+	int low=0, high = l-1;
 	while(low<=high){
 		int mid = (low+high)/2;
 		int built = 0;
-		if(mid < pos[0])
-			built++;
-		if(pos[n-1] + mid <l)
-			built++;
-		FOR(i, n-1){
+		FOR(i, n){
 			built+=(pos[i+1] - pos[i]-1)/mid;
 		}
 		if(built > m)
