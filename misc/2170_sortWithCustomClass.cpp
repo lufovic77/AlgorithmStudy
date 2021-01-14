@@ -9,7 +9,7 @@
 using namespace std;
 bool cmp(pair<int, int> u, pair<int, int> t){
 	if(u.first==t.first)
-		return u.second <t.second;
+		return u.second <=t.second;
 	return u.first<t.first;
 }
 
@@ -28,6 +28,10 @@ int main(){
 		int s = pos[i].second;
 		if(i == 0){
 			l = f, r = s;
+                        if(n==1){
+                            cout<<r-l;
+                            return 0;
+                        }
 			continue;
 		}
 		if(f > r){ // new range		
