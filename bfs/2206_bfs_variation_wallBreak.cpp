@@ -13,7 +13,7 @@ int dy[4] = {0, 1, 0, -1};
 int map[1010][1010]; //just for zero initialization
 int mini = INT_MAX;
 int n,m;
-void recursion(queue<pair< pair<int, int> ,pair<int, int> > > q, int visited[1010][1010]){
+void recursion(queue<pair< pair<int, int> ,pair<int, int> > > q, vector<vector<int>> visited){
 	while(!q.empty()){
 			int newx, newy;
 			int x = q.front().first.first, y = q.front().first.second;
@@ -34,7 +34,12 @@ void recursion(queue<pair< pair<int, int> ,pair<int, int> > > q, int visited[101
 	}
 }
 int main(){
-	int visited[1010][1010];
+	vector<vector<int>> visited;
+	FOR(i, 1010){
+		vector<int> tmp;
+		tmp.assign(1010, 0);
+		visited.push_back(tmp);
+	}
 	queue<pair< pair<int, int> ,pair<int, int> > > q; //(x,y) , (break wall, cnt)
 	cin>>n>>m;
 	FOR2(i, n)
@@ -66,11 +71,11 @@ int main(){
 							visited[newx][newy] = 1;
 							queue<pair< pair<int, int> ,pair<int, int> > > newq;
 							newq.push(make_pair(make_pair(newx, newy), make_pair(0, cnt+1)));
-							int newmap[1010][1010];
+							/*int newmap[1010][1010];
 							FOR2(a, n)
 								FOR2(b, m)
-								newmap[a][n] = visited[a][b];
-							recursion(newq,newmap);
+								newmap[a][n] = visited[a][b];*/
+							recursion(newq,visited);
 						}
 					}
 					else{ //no wall
