@@ -41,19 +41,24 @@ int main(){
 		FOR2(j, m){
 			scanf("%1d", &map[i][j]);
 		}
+	if(n==1 && m==1){
+		cout<<"1";
+		return 0;
+	}
 	q.push(make_pair(make_pair(1, 1), make_pair(1, 1)));
 	visited[1][1] = 1;
 	while(!q.empty()){
 			int newx, newy;
 			int x = q.front().first.first, y = q.front().first.second;
+			//cout<<x<<" "<<y<<" "<<visited[1][10]<< endl;
 			int attempt = q.front().second.first, cnt = q.front().second.second;
 			q.pop();
 			FOR(i, 4){
 				newx = x+dx[i];
 				newy = y+dy[i];
 				if(newx == n && newy == m){
-					cout<<min(mini, cnt+1);
-					return 0;
+					mini = min(mini, cnt+1);
+					continue;
 				}
 				if(visited[newx][newy] == 0 && newx>=1&&newy>=1&&newx<=n&&newy<=m ){
 					if(map[newx][newy]==1){ //is wall
@@ -62,10 +67,10 @@ int main(){
 							queue<pair< pair<int, int> ,pair<int, int> > > newq;
 							newq.push(make_pair(make_pair(newx, newy), make_pair(0, cnt+1)));
 							int newmap[1010][1010];
-							FOR(a, 1010)
-								FOR(b, 1010)
-								newmap[a][b] = visited[a][b];
-							recursion(newq, newmap);
+							FOR2(a, n)
+								FOR2(b, m)
+								newmap[a][n] = visited[a][b];
+							recursion(newq,newmap);
 						}
 					}
 					else{ //no wall
