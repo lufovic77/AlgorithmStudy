@@ -16,7 +16,7 @@ ull dfs(int node, int time, int n){
 		if(time<n)
 			dp[node][n-time] += dfs(a, time+1, n)%1000000007;
 	}
-	return dp[node][n-time];
+	return dp[node][n-time]%1000000007;
 }
 int main(){
 	map[0] = {1,2};
@@ -30,5 +30,5 @@ int main(){
 	int n;
 	cin>>n;
 	ull ret = dfs(0, 0, n);
-	cout<<dp[0][n];
+	cout<<dp[0][n]%1000000007;
 }
