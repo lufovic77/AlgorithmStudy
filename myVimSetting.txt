@@ -6,6 +6,7 @@ set tabstop=4
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
+" 만약 아래 vundle에서 에러가 나면 github에서 vundle을 찾아 ~/.vim/bundle에 clone을 해주면 된다.
 call vundle#begin()
 
 "VundleVim/Vundle.vim
