@@ -9,5 +9,5 @@
 #define FOR2(i,n) for(int i=1;i<=n;i++)
 using namespace std;
 int main(){
-	
+	ios::sync_with_stdio(false);//Should not combine iostream with cstdio furthur
 }
