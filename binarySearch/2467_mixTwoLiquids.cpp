@@ -23,14 +23,15 @@ int main(){
 		int start = 0, end = v.size()-1;
 		long long sum, rsum, lsum;
 		num = v[i];
-		while(left<right){
+		while(left<=right){
 			mid = (left+right)/2;
 			sum = abs(num+v[mid]);
 			if(sum<=mini.first && v[mid]!=num){
 				mini.first = sum;
 				mini.second.first = min(num, v[mid]);
 				mini.second.second = max(num, v[mid]);
-			}			lsum = num+v[mid-1];
+			}			
+			lsum = num+v[mid-1];
 			rsum = num+v[mid+1];
 			if(abs(lsum) < abs(rsum))
 				right = mid-1;
