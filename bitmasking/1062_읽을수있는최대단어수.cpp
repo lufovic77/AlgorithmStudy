@@ -15,9 +15,7 @@ bitset<27> alpha;
 bitset<27> cmp;
 int n, k,ret = INT_MIN;
 void recursive(int chance, int index){
-	if(index>26)
-		return ;
-	if(chance == 0){
+	if(chance == 0 || index>26){
 		int cnt = 0;
 		FOR(i, n){
 //			cout<<(bit[i]&cmp) <<endl;  <<를 bit operator로 착각해서 괄호를 꼭 해줘야함 ㅋㅋㅋㅋㅋ
