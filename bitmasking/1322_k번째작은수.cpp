@@ -11,6 +11,7 @@
 using namespace std;
 bitset<35> biX;
 bitset<35> biK;
+bitset<35> biY;
 int main(){
 	ios::sync_with_stdio(false);//Should not combine iostream with cstdio furthur
 	unsigned long long ret=0;
@@ -24,14 +25,10 @@ int main(){
 		x /= 2;
 		index++;
 	}
-	vector <int> zeroIndex, oneIndex;
-	FOR(i, 35){
+	vector <int> zeroIndex;
+	FOR(i, 35)
 		if(biX[i]==0)
 			zeroIndex.push_back(i);
-		else
-			oneIndex.push_back(i);
-	}
-	//사실 zeroIndex만 있으면 되긴 함. 
 	index = 0;
 	while(k>0){
 		if(k%2 == 1)
@@ -41,16 +38,20 @@ int main(){
 		k /= 2;
 		index++;
 	}
-	biX = ~biX;
 	index = 0;
-	for(auto a: zeroIndex){
-		if(biK[index] == 1)
-			biX.set(a,true);
+	FOR(i, 35){
+		if(biX[i]==0){
+			if(biK[index]==1)
+				biY.set(i, true);
+			else
+				biY.set(i, false);
+			index++;
+		}
 		else
-			biX.set(a,false);
-		index++;
+			biY.set(i, false);
 	}
+
 	FOR(i, 35)
-		ret+=biX[i]*pow(2, i);
+		ret+=biY[i]*(1<<i);
 	cout<<ret;
 }
