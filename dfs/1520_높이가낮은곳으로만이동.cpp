@@ -1,19 +1,13 @@
 #include <iostream>
-#include <cstdio>
-#include <cmath>
-#include <vector>
-#include <algorithm>
-#include <limits.h>
-#include <queue>
 #define FOR(i,n) for(int i=0;i<n;i++)
-#define FOR2(i,n) for(int i=1;i<=n;i++)
 int dx[4] = {-1, 0, 1, 0}; 
 int dy[4] = {0, 1, 0, -1};
 using namespace std;
 int ret = 0, m, n;
 int dp[510][510];
 int visited[510][510];
-int map[510][510];
+int	map[510][510];
+int realZero[510][510];
 /*
 나는 항상 기준이
   -> 요기가 y 
@@ -29,6 +23,8 @@ int dfs(int x, int y){
 	if(dp[x][y]!=0){
 		return dp[x][y];
 	}
+	if(dp[x][y] == 0 && realZero[x][y]==1)
+		return 0;
 	FOR(i, 4){
 		int newX = x + dx[i];
 		int newY = y + dy[i];
@@ -38,6 +34,14 @@ int dfs(int x, int y){
 			visited[newX][newY] = 0;
 		}
 	}
+	/*
+		realZero가 필요한 이유
+		: 탐색을 끝난 dp의 값이 0인건데, 
+		코드에서는 방문을 아직 안한 경로인줄 알고 탐색을 시작할 수도 있다. 
+		이를 방지하려고 진짜 dp값이 0인 경우 realZero도 1로 세팅해줘서 이런 오류를 막는다. 
+	*/
+	if(dp[x][y]==0)
+		realZero[x][y] = 1;
 	return dp[x][y];
 }
 int main(){
